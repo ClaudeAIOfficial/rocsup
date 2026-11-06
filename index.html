@@ -181,5 +181,38 @@ function bindPage(){let form=document.getElementById('search-form'),input=docume
 document.getElementById('menu-toggle').addEventListener('click',()=>{let menu=document.getElementById('main-nav');let open=menu.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open))});document.querySelector('.header-actions [data-open-request]').addEventListener('click',()=>document.getElementById('support-dialog').showModal());document.querySelector('.user-action').addEventListener('click',()=>document.getElementById('support-dialog').showModal());document.getElementById('dialog-close').addEventListener('click',()=>document.getElementById('support-dialog').close());document.getElementById('dialog-back').addEventListener('click',()=>document.getElementById('support-dialog').close());document.querySelector('[data-cookie-info]').addEventListener('click',()=>alert('This demo does not set tracking cookies.'));
 window.addEventListener('hashchange',route);window.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))document.getElementById('search-suggestions')?.classList.remove('visible')});route();
 </script>
-</body>
+<style>
+.service-image-fallback{display:inline-flex;align-items:center;justify-content:center;gap:7px;color:#fff;font-size:26px;font-weight:700;white-space:nowrap}
+.service-image-fallback svg{width:29px;height:29px;flex-shrink:0}
+.service-image-fallback.gta-fallback{font-family:Arial Black,Arial,sans-serif;font-size:32px;font-weight:1000;letter-spacing:-2.5px;text-transform:lowercase;filter:drop-shadow(2px 3px 0 #000)}
+.service-image-fallback.gta-fallback span{font-size:41px;color:#ffbf29}
+.community-image-fallback{display:inline-block;color:#fff;font-size:25px;letter-spacing:-.9px}
+</style><script>
+/* Use original support SVGs where available, with a visible fallback if the remote server blocks hotlinking. */
+(function(){
+ function fallbackImage(el){
+  if(!(el instanceof HTMLImageElement)||!el.isConnected||el.dataset.fallbackApplied)return;
+  if(!(el.classList.contains('original-service-logo')||/^(FiveM|RedM) logo$/.test(el.alt)))return;
+  el.dataset.fallbackApplied='1';
+  const name=el.alt;
+  const span=document.createElement('span');
+  span.className=el.classList.contains('original-service-logo')?'service-image-fallback':'community-image-fallback';
+  if(name==='GTA+ Subscription'){
+   span.classList.add('gta-fallback');
+   span.innerHTML='gta<span>+</span>';
+  }else if(name==='FiveM logo'||name==='RedM logo'){
+   span.textContent=name.replace(' logo','');
+  }else{
+   const mark=document.querySelector('.brand-symbol svg');
+   if(mark){const clone=mark.cloneNode(true);clone.setAttribute('aria-hidden','true');span.appendChild(clone)}
+   span.appendChild(document.createTextNode(name.replace(/^Rockstar Games /,'').replace(/^Rockstar /,'')));
+  }
+  el.replaceWith(span);
+ }
+ document.addEventListener('error',e=>fallbackImage(e.target),true);
+ const observer=new MutationObserver(()=>document.querySelectorAll('img.original-service-logo, .community-brands img').forEach(el=>{if(el.complete&&el.naturalWidth===0)fallbackImage(el)}));
+ observer.observe(document.body,{subtree:true,childList:true});
+ document.querySelectorAll('img.original-service-logo, .community-brands img').forEach(el=>{if(el.complete&&el.naturalWidth===0)fallbackImage(el)});
+})();
+</script></body>
 </html>
