@@ -59,6 +59,36 @@
 .social-links svg{width:19px;height:19px;fill:currentColor;display:block}
 .game-card img{object-fit:cover;object-position:center}
 @media(max-width:768px){.solution-icon{flex:0 0 30px;width:30px;height:30px}.solution-icon .original-solution-icon{width:30px;height:30px}.service-card .original-service-logo{max-width:76%}.service-card .original-service-logo[alt="Rockstar Games Launcher"]{width:156px}}
+
+/* Header and notice sizing matched to full-width desktop reference. */
+@media (min-width:1121px){
+ .site-header{height:86px}
+ .header-inner{width:100%;max-width:none;padding:0 54px;gap:20px}
+ .brand{gap:13px;min-width:0;flex-shrink:0}
+ .brand-symbol{height:33px;width:33px;flex-basis:33px}
+ .brand-symbol>svg{height:33px;width:33px}
+ .brand-divider{height:32px}
+ .brand-name{font-size:27px;line-height:1;font-weight:760;letter-spacing:-1.15px}
+ .main-nav{gap:36px}
+ .nav-link{font-size:13px;font-weight:750}
+ .header-actions{gap:19px}
+ .request-btn{height:36px;padding:0 17px;font-size:12px}
+ .user-action svg{width:19px;height:19px}
+ .announcement{font-size:18px;line-height:1.45;min-height:72px;padding:10px 20px}
+ .announcement>div{max-width:1160px}
+ .announcement .external{font-size:14px}
+}
+@media (min-width:801px) and (max-width:1120px){
+ .site-header{height:76px}
+ .header-inner{max-width:none;width:100%;padding:0 25px}
+ .brand{min-width:0}
+ .brand-name{font-size:23px}
+ .main-nav{gap:18px}
+ .announcement{min-height:66px;font-size:16px}
+}
+@media (max-width:800px){
+ .header-inner{max-width:none;width:100%}
+}
 </style>
 </head>
 <body>
